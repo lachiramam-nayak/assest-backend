@@ -40,6 +40,20 @@ logger = logging.getLogger(__name__)
 last_good_tags_by_id: dict = {}
 
 
+@app.get("/")
+async def health_root():
+    return {
+        "message": "Kinesis RTLS backend is running",
+        "api_root": "/api/",
+        "docs": "/docs"
+    }
+
+
+@app.get("/health")
+async def health_check():
+    return {"status": "ok"}
+
+
 class Anchor(BaseModel):
     id: str
     device_id: str
